@@ -1,0 +1,35 @@
+﻿@model List<ProyectoFinal.Models.Elemento>
+@{
+    ViewData["Title"] = "Carrito de Compras";
+}
+<h2>Carrito de Compras</h2>
+@if (Model.Count == 0)
+{
+    <p>Tu carrito está vacío.</p>
+}
+else
+{
+    <table border="1" style="width:100%; text-align:center; border-collapse: collapse;">
+        <tr style="border: 1px solid black;">
+            <th style="border: 1px solid black;">ID</th>
+            <th style="border: 1px solid black;">Nombre</th>
+            <th style="border: 1px solid black;">Precio</th>
+            <th style="border: 1px solid black;">Cantidad</th>
+            <th style="border: 1px solid black;">Total</th>
+        </tr>
+        @foreach (var elemento in Model)
+        {
+            <tr style="border: 1px solid black;">
+                <td style="border: 1px solid black;">@elemento.Producto.Id</td>
+                <td style="border: 1px solid black;">@elemento.Producto.Nombre</td>
+                <td style="border: 1px solid black;">@elemento.Producto.Precio Bs.</td>
+                <td style="border: 1px solid black;">@elemento.Cantidad</td>
+                <td style="border: 1px solid black;">@(elemento.Producto.Precio * elemento.Cantidad) Bs.</td>
+            </tr>
+        }
+    </table>
+    <form method="post" asp-controller="Supermercado" asp-action="FinalizarCompra">
+        <button type="submit">Finalizar Compra</button>
+    </form>
+}
+<a href="/Supermercado/Index">Volver al Supermercado</a>

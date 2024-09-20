@@ -1,0 +1,29 @@
+﻿@model List<ProyectoFinal.Models.Producto>
+@{
+    ViewData["Title"] = "Supermercado";
+}
+<h2>Supermercado</h2>
+<table border="1" style="width:100%; text-align:center; border-collapse: collapse;">
+    <tr style="border: 1px solid black;">
+        <th style="border: 1px solid black;">ID</th>
+        <th style="border: 1px solid black;">Nombre</th>
+        <th style="border: 1px solid black;">Precio</th>
+        <th style="border: 1px solid black;">Imagen</th>
+        <th style="border: 1px solid black;">Acción</th>
+    </tr>
+    @foreach (var producto in Model)
+    {
+        <tr style="border: 1px solid black;">
+            <td style="border: 1px solid black;">@producto.Id</td>
+            <td style="border: 1px solid black;">@producto.Nombre</td>
+            <td style="border: 1px solid black;">@producto.Precio Bs.</td>
+            <td style="border: 1px solid black;"><img src="@producto.Imagen" width="100" height="100" /></td>
+            <td style="border: 1px solid black;">
+                <form method="post" asp-controller="Supermercado" asp-action="AgregarAlCarrito" asp-route-id="@producto.Id">
+                    <button type="submit">Agregar al carrito</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+<a href="/Supermercado/Carrito">Ver Carrito</a>
